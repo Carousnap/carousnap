@@ -1,0 +1,202 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+
+.carouSnap,
+.numbSlide,
+.numbSlide p,
+.bnSlide,
+.bnSlide button,
+.photoCollect,
+.photoCollect img,
+.indCat,
+.sliderRange,
+.indCat ul,
+.indCat ul li {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+div.carouSnap {
+  /* RESIZE THE CAROUSEL HERE*/
+  --maxWidth: 600px;
+  --height: 400px;
+  /*RESIZE THE CAROUSEL HERE*/
+  font-family: "Poppins", sans-serif;
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--maxWidth);
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  -webkit-box-shadow: 5px 15px 60px rgba(0, 0, 0, 0.2);
+  box-shadow: 5px 15px 60px rgba(0, 0, 0, 0.2);
+  margin-bottom: 50px;
+}
+
+.carouSnap-round {
+  border-radius: 15px;
+}
+
+div.carouSnap div.numbSlide {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  right: 10px;
+}
+div.carouSnap div.numbSlide p.num {
+  display: inline-block;
+  width: 40px;
+  padding: 5px;
+  background-color: rgb(255, 255, 255, 0.5);
+  font-size: 10px;
+  border-radius: 20px;
+  text-align: center;
+  font-weight: 400;
+}
+
+div.carouSnap div.bnSlide {
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 90%;
+  height: 30px;
+  display: none;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background: none;
+}
+div.carouSnap div.bnSlide > button {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  line-height: 30px;
+  font-size: 10px;
+  font-weight: 400;
+  border: none;
+  outline: none;
+  background-color: rgb(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+div.carouSnap div.photoCollect {
+  width: 100%;
+  min-height: calc(var(--height) / 2);
+  height: auto;
+  max-height: var(--height);
+  background-color: rgb(197, 197, 197);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* justify-content: start;
+  align-content: center; */
+  overflow-x: scroll;
+  -ms-scroll-snap-type: x mandatory;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+div.carouSnap div.photoCollect::-webkit-scrollbar {
+  display: none;
+}
+
+div.carouSnap div.photoCollect > img {
+  width: inherit;
+  height: inherit;
+  min-width: 100%;
+  display: block;
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#c7c7c7),
+    to(#8b8b8b)
+  );
+  background-image: -o-linear-gradient(left, #c7c7c7, #8b8b8b);
+  background-image: linear-gradient(90deg, #c7c7c7, #8b8b8b);
+  scroll-snap-align: start;
+  -o-object-fit: cover;
+  object-fit: cover;
+  -o-object-position: center;
+  object-position: center;
+}
+
+div.carouSnap div.indCat {
+  margin: 0 auto;
+  width: 160px;
+  height: 30px;
+  position: relative;
+  z-index: 2;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+div.carouSnap div.indCat input.sliderRange {
+  width: 100px;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+  -webkit-appearance: none;
+  background: none;
+  outline: none;
+}
+
+div.carouSnap div.indCat input.sliderRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  background: #747373;
+  cursor: pointer;
+}
+
+div.carouSnap div.indCat input.sliderRange::-moz-range-thumb {
+  width: 10px;
+  height: 10px;
+  background: #747373;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+div.carouSnap div.indCat > ul {
+  list-style: none;
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  z-index: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+div.carouSnap div.indCat > ul > li {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  background-color: #d6d6d6;
+}
