@@ -166,31 +166,6 @@ window.addEventListener("touchstart", function (e) {
   }
 });
 
-window.addEventListener("touchend", function (e) {
-  if (e.target.parentElement.className == "photoCollect") {
-    const btnSlide = e.target.parentElement.parentElement.children[1];
-    btnSlide.style.display = "none";
-  }
-});
-
-document.body.addEventListener("mouseover", function (e) {
-  if (e.target.parentElement.className == "photoCollect") {
-    const btnSlide = e.target.parentElement.parentElement.children[1];
-    btnSlide.style.display = "flex";
-
-    btnSlide.addEventListener("mousemove", function () {
-      btnSlide.style.display = "flex";
-    });
-  }
-});
-
-document.body.addEventListener("mouseout", function (e) {
-  if (e.target.parentElement.className == "photoCollect") {
-    const btnSlide = e.target.parentElement.parentElement.children[1];
-    btnSlide.style.display = "none";
-  }
-});
-
 window.addEventListener("click", function (e) {
   if (e.target.className == "btn-slide-prev") {
     isScroll = false;
