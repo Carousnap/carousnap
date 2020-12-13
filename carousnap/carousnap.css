@@ -87,10 +87,12 @@ div.carouSnap div.bnSlide > button {
   cursor: pointer;
 }
 
-div.carouSnap:hover div.bnSlide{
- display:-webkit-box;
- display:-ms-flexbox;
- display:flex;
+@media (hover: hover) and (pointer: fine) {
+	div.carouSnap:hover div.bnSlide{
+		display:-webkit-box;
+		display:-ms-flexbox;
+		display:flex;
+	}
 }
 
 div.carouSnap div.photoCollect {
