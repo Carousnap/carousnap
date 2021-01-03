@@ -45,26 +45,16 @@ window.addEventListener("load", function () {
             " / " +
             photos.childElementCount;
 
-          const slider = document.createElement("input");
-
           function setAttr(element, values) {
             for (var key in values) {
               element.setAttribute(key, values[key]);
             }
           }
 
-          setAttr(slider, {
-            type: "range",
-            min: "1",
-            max: photos.childElementCount,
-            value: "1",
-            class: "sliderRange",
-          });
-
-          indicator.appendChild(slider);
           let ul = document.createElement("ul");
           for (i = 0; i < photos.childElementCount; i++) {
             let li = document.createElement("li");
+            li.setAttribute("data-target", i + 1);
             ul.appendChild(li);
           }
           indicator.appendChild(ul);
@@ -86,8 +76,16 @@ window.addEventListener("load", function () {
           btnSlide.appendChild(btnPrev);
           btnSlide.appendChild(btnNext);
 
-          slider.value = Math.round(scroll / scrollWidth + 1);
-          slider.style.width = photos.childElementCount * 10 + "%";
+          const num_active = Math.round(scroll / scrollWidth + 1);
+
+          const ul_elem = ul.childElementCount;
+          for (j = 0; j <= ul_elem; j++) {
+            if (j + 1 == num_active) {
+              let li_element = ul.children;
+              li_element[j].setAttribute("class", "active");
+            }
+          }
+
           ul.style.width = photos.childElementCount * 10 + "%";
         }
       }
@@ -107,22 +105,6 @@ window.addEventListener("load", function () {
   });
 });
 
-window.addEventListener("input", function (e) {
-  if (e.target.className == "sliderRange") {
-    e.preventDefault();
-    isScroll = false;
-    const value = e.target.value;
-    const photos = e.target.parentElement.parentElement.children[2];
-    const crs = photos.parentElement;
-    const numSlide =
-      e.target.parentElement.parentElement.children[0].children[0];
-    const styleElement = getComputedStyle(crs);
-    const scrollWidth = parseInt(styleElement.width, 10);
-    photos.scrollLeft = value * scrollWidth - scrollWidth;
-    numSlide.innerHTML = value + " / " + photos.childElementCount;
-  }
-});
-
 window.addEventListener("wheel", function (e) {
   if (e.target.parentElement.className == "photoCollect") {
     isScroll = true;
@@ -131,7 +113,10 @@ window.addEventListener("wheel", function (e) {
     photos.addEventListener("scroll", function (e) {
       const photos = e.target.childElementCount;
       const numSlide = e.target.parentElement.children[0].children[0];
-      const slider = e.target.parentElement.children[3].children[0];
+      const li_elem = e.target.parentElement.children[3].children[0].children;
+      const total_li_elem =
+        e.target.parentElement.children[3].children[0].childElementCount;
+
       const value = e.target.scrollLeft;
       const crs = e.target.parentElement;
       const styleElement = getComputedStyle(crs);
@@ -139,7 +124,14 @@ window.addEventListener("wheel", function (e) {
       const currentSlide = Math.round(value / scrollWidth + 1);
       if (isScroll) {
         numSlide.innerHTML = currentSlide + " / " + photos;
-        slider.value = currentSlide;
+
+        for (ec = 0; ec < total_li_elem; ec++) {
+          let sl = li_elem[ec];
+          sl.removeAttribute("class");
+          if (ec + 1 == currentSlide) {
+            sl.setAttribute("class", "active");
+          }
+        }
       }
     });
   }
@@ -148,11 +140,15 @@ window.addEventListener("wheel", function (e) {
 window.addEventListener("touchstart", function (e) {
   if (e.target.parentElement.className == "photoCollect") {
     isScroll = true;
+
     const photos = e.target.parentElement.parentElement.children[2];
     photos.addEventListener("scroll", function (e) {
       const photos = e.target.childElementCount;
       const numSlide = e.target.parentElement.children[0].children[0];
-      const slider = e.target.parentElement.children[3].children[0];
+      const li_elem = e.target.parentElement.children[3].children[0].children;
+      const total_li_elem =
+        e.target.parentElement.children[3].children[0].childElementCount;
+
       const value = e.target.scrollLeft;
       const crs = e.target.parentElement;
       const styleElement = getComputedStyle(crs);
@@ -160,19 +156,35 @@ window.addEventListener("touchstart", function (e) {
       const currentSlide = Math.round(value / scrollWidth + 1);
       if (isScroll) {
         numSlide.innerHTML = currentSlide + " / " + photos;
-        slider.value = currentSlide;
+
+        for (ec = 0; ec < total_li_elem; ec++) {
+          let sl = li_elem[ec];
+          sl.removeAttribute("class");
+          if (ec + 1 == currentSlide) {
+            sl.setAttribute("class", "active");
+          }
+        }
       }
     });
   }
 });
 
 window.addEventListener("click", function (e) {
-  if (e.target.className == "btn-slide-prev") {
+  if (
+    e.target.className == "btn-slide-prev" &&
+    e.target.parentElement.className == "bnSlide"
+  ) {
     isScroll = false;
+
     const photos = e.target.parentElement.parentElement.children[2];
     const numSlide =
       e.target.parentElement.parentElement.children[0].children[0];
-    const slider = e.target.parentElement.parentElement.children[3].children[0];
+    const li_elem =
+      e.target.parentElement.parentElement.children[3].children[0].children;
+    const total_li_elem =
+      e.target.parentElement.parentElement.children[3].children[0]
+        .childElementCount;
+
     const scrLeft = photos.scrollLeft;
     const styleElement = getComputedStyle(photos);
     const scrollWidth = parseInt(styleElement.width, 10);
@@ -182,17 +194,34 @@ window.addEventListener("click", function (e) {
 
     if (value >= 0) {
       numSlide.innerHTML = currentSlide + " / " + photos.childElementCount;
-      slider.value = currentSlide;
+
+      for (ec = 0; ec < total_li_elem; ec++) {
+        let sl = li_elem[ec];
+        sl.removeAttribute("class");
+        if (ec + 1 == currentSlide) {
+          sl.setAttribute("class", "active");
+        }
+      }
+
       photos.scrollTo(value, 0);
     }
   }
 
-  if (e.target.className == "btn-slide-next") {
+  if (
+    e.target.className == "btn-slide-next" &&
+    e.target.parentElement.className == "bnSlide"
+  ) {
     isScroll = false;
+
     const photos = e.target.parentElement.parentElement.children[2];
     const numSlide =
       e.target.parentElement.parentElement.children[0].children[0];
-    const slider = e.target.parentElement.parentElement.children[3].children[0];
+    const li_elem =
+      e.target.parentElement.parentElement.children[3].children[0].children;
+    const total_li_elem =
+      e.target.parentElement.parentElement.children[3].children[0]
+        .childElementCount;
+
     const scrLeft = Math.floor(photos.scrollLeft);
     const styleElement = getComputedStyle(photos);
     const scrollWidth = parseFloat(styleElement.width, 10);
@@ -204,8 +233,44 @@ window.addEventListener("click", function (e) {
 
     if (value <= scrollMax) {
       numSlide.innerHTML = currentSlide + " / " + photos.childElementCount;
-      slider.value = currentSlide;
+
+      for (ec = 0; ec < total_li_elem; ec++) {
+        let sl = li_elem[ec];
+        sl.removeAttribute("class");
+        if (ec + 1 == currentSlide) {
+          sl.setAttribute("class", "active");
+        }
+      }
+
       photos.scrollTo(value, 0);
     }
+  }
+
+  if (
+    e.target.tagName == "LI" &&
+    e.target.parentElement.parentElement.className == "indCat"
+  ) {
+    isScroll = false;
+    const indiCat = e.target.parentElement.parentElement;
+
+    const value = e.target.getAttribute("data-target");
+    const li_elem = indiCat.children[0].children;
+    const total_li_elem = indiCat.children[0].childElementCount;
+
+    for (ec = 0; ec < total_li_elem; ec++) {
+      let sl = li_elem[ec];
+      sl.removeAttribute("class");
+      if (ec + 1 == value) {
+        sl.setAttribute("class", "active");
+      }
+    }
+
+    const photos = indiCat.parentElement.children[2];
+    const crs = photos.parentElement;
+    const numSlide = indiCat.parentElement.children[0].children[0];
+    const styleElement = getComputedStyle(crs);
+    const scrollWidth = parseInt(styleElement.width, 10);
+    photos.scrollLeft = value * scrollWidth - scrollWidth;
+    numSlide.innerHTML = value + " / " + photos.childElementCount;
   }
 });
