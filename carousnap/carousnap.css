@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
 
 .carouSnap,
 .numbSlide,
@@ -139,6 +139,7 @@ div.carouSnap div.photoCollect > img {
   object-position: center;
 }
 
+
 div.carouSnap div.indCat {
   margin: 0 auto;
   width: 160px;
@@ -162,27 +163,86 @@ div.carouSnap div.indCat input.sliderRange {
   position: relative;
   z-index: 2;
   -webkit-appearance: none;
-  background: none;
-  outline: none;
+  -moz-appearance: none;
+       appearance: none;
+  background:none;
+  border:none;
+}
+div.carouSnap div.indCat input.sliderRange:focus {
+  outline:none;
 }
 
+div .carouSnap div.indCat input.sliderRange::-webkit-slider-runnable-track{
+	width:100%;
+	height:10px;
+	background:none;
+}
+
+div .carouSnap div.indCat input.sliderRange:focus::-webkit-slider-runnable-track{
+	width:100%;
+	height:10px;
+	background:none;
+}
+
+
+
+
+div .carouSnap div.indCat input.sliderRange::-moz-range-track{
+	width:100%;
+	height:10px;
+	background:none;
+}
+
+div .carouSnap div.indCat input.sliderRange:focus::-moz-range-track{
+	width:100%;
+	height:10px;
+	background:none;
+}
+
+
+div .carouSnap div.indCat input.sliderRange::-ms-track{
+	width:100%;
+	height:10px;
+	background:none;
+}
+
+div .carouSnap div.indCat input.sliderRange:focus::-ms-track{
+	width:100%;
+	height:10px;
+	background:none;
+}
+
+
 div.carouSnap div.indCat input.sliderRange::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance:none;
   width: 10px;
   height: 10px;
   border-radius: 50px;
   background: #747373;
   cursor: pointer;
+  margin-top:0;
 }
 
 div.carouSnap div.indCat input.sliderRange::-moz-range-thumb {
+  -webkit-appearance:none;
   width: 10px;
   height: 10px;
   background: #747373;
   cursor: pointer;
   border-radius: 50px;
+  margin-top:0;
 }
+div.carouSnap div.indCat input.sliderRange::-ms-thumb {
+  -webkit-appearance:none;
+  width: 10px;
+  height: 10px;
+  background: #747373;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-top:0;
+}
+
+
 
 div.carouSnap div.indCat > ul {
   list-style: none;
