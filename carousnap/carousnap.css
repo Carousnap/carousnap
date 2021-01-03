@@ -8,7 +8,7 @@
 .photoCollect,
 .photoCollect img,
 .indCat,
-.sliderRange,
+.slideRange,
 .indCat ul,
 .indCat ul li {
   margin: 0;
@@ -123,14 +123,8 @@ div.carouSnap div.photoCollect > img {
   height: inherit;
   min-width: 100%;
   display: block;
-  background-image: -webkit-gradient(
-    linear,
-    left top,
-    right top,
-    from(#c7c7c7),
-    to(#8b8b8b)
-  );
   background-image: -o-linear-gradient(left, #c7c7c7, #8b8b8b);
+  background-image: -webkit-gradient(linear, left top, right top, from(#c7c7c7), to(#8b8b8b));
   background-image: linear-gradient(90deg, #c7c7c7, #8b8b8b);
   scroll-snap-align: start;
   -o-object-fit: cover;
@@ -157,93 +151,6 @@ div.carouSnap div.indCat {
   justify-content: center;
 }
 
-div.carouSnap div.indCat input.sliderRange {
-  width: 100px;
-  cursor: pointer;
-  position: relative;
-  z-index: 2;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-       appearance: none;
-  background:none;
-  border:none;
-}
-div.carouSnap div.indCat input.sliderRange:focus {
-  outline:none;
-}
-
-div .carouSnap div.indCat input.sliderRange::-webkit-slider-runnable-track{
-	width:100%;
-	height:10px;
-	background:none;
-}
-
-div .carouSnap div.indCat input.sliderRange:focus::-webkit-slider-runnable-track{
-	width:100%;
-	height:10px;
-	background:none;
-}
-
-
-
-
-div .carouSnap div.indCat input.sliderRange::-moz-range-track{
-	width:100%;
-	height:10px;
-	background:none;
-}
-
-div .carouSnap div.indCat input.sliderRange:focus::-moz-range-track{
-	width:100%;
-	height:10px;
-	background:none;
-}
-
-
-div .carouSnap div.indCat input.sliderRange::-ms-track{
-	width:100%;
-	height:10px;
-	background:none;
-}
-
-div .carouSnap div.indCat input.sliderRange:focus::-ms-track{
-	width:100%;
-	height:10px;
-	background:none;
-}
-
-
-div.carouSnap div.indCat input.sliderRange::-webkit-slider-thumb {
-  -webkit-appearance:none;
-  width: 10px;
-  height: 10px;
-  border-radius: 50px;
-  background: #747373;
-  cursor: pointer;
-  margin-top:0;
-}
-
-div.carouSnap div.indCat input.sliderRange::-moz-range-thumb {
-  -webkit-appearance:none;
-  width: 10px;
-  height: 10px;
-  background: #747373;
-  cursor: pointer;
-  border-radius: 50px;
-  margin-top:0;
-}
-div.carouSnap div.indCat input.sliderRange::-ms-thumb {
-  -webkit-appearance:none;
-  width: 10px;
-  height: 10px;
-  background: #747373;
-  cursor: pointer;
-  border-radius: 50px;
-  margin-top:0;
-}
-
-
-
 div.carouSnap div.indCat > ul {
   list-style: none;
   width: 100px;
@@ -261,10 +168,15 @@ div.carouSnap div.indCat > ul {
   justify-content: space-between;
 }
 
+
 div.carouSnap div.indCat > ul > li {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50px;
   background-color: #d6d6d6;
+  cursor:pointer;
+}
+div.carouSnap div.indCat > ul > li.active {
+  background:#747373;
 }
