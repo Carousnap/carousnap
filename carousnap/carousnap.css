@@ -127,6 +127,7 @@ div.carouSnap div.photoCollect > img {
   background-image: -webkit-gradient(linear, left top, right top, from(#c7c7c7), to(#8b8b8b));
   background-image: linear-gradient(90deg, #c7c7c7, #8b8b8b);
   scroll-snap-align: start;
+  scroll-snap-stop:always;
   -o-object-fit: cover;
   object-fit: cover;
   -o-object-position: center;
