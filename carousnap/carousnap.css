@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 
 .carouSnap,
 .numbSlide,
@@ -18,14 +18,9 @@
 }
 
 div.carouSnap {
-  /* RESIZE THE CAROUSEL HERE*/
-  --maxWidth: 600px;
-  --height: 400px;
-  /*RESIZE THE CAROUSEL HERE*/
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   margin: 0 auto;
   width: 100%;
-  max-width: var(--maxWidth);
   height: auto;
   position: relative;
   overflow: hidden;
@@ -88,27 +83,27 @@ div.carouSnap div.bnSlide > button {
 }
 
 @media (hover: hover) and (pointer: fine) {
-	div.carouSnap:hover div.bnSlide{
-		display:-webkit-box;
-		display:-ms-flexbox;
-		display:flex;
-	}
+  div.carouSnap:hover div.bnSlide {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+  }
 }
 
 div.carouSnap div.photoCollect {
   width: 100%;
-  min-height: calc(var(--height) / 2);
   height: auto;
-  max-height: var(--height);
+  aspect-ratio: 3 / 2;
+
   background-color: rgb(197, 197, 197);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  /* justify-content: start;
-  align-content: center; */
+
   overflow-x: scroll;
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   -ms-overflow-style: none;
   scrollbar-width: none;
@@ -119,21 +114,24 @@ div.carouSnap div.photoCollect::-webkit-scrollbar {
 }
 
 div.carouSnap div.photoCollect > img {
-  width: inherit;
-  height: inherit;
-  min-width: 100%;
-  display: block;
+  height: auto;
+  width: 100%;
   background-image: -o-linear-gradient(left, #c7c7c7, #8b8b8b);
-  background-image: -webkit-gradient(linear, left top, right top, from(#c7c7c7), to(#8b8b8b));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    from(#c7c7c7),
+    to(#8b8b8b)
+  );
   background-image: linear-gradient(90deg, #c7c7c7, #8b8b8b);
   scroll-snap-align: start;
-  scroll-snap-stop:always;
+  scroll-snap-stop: always;
   -o-object-fit: cover;
   object-fit: cover;
   -o-object-position: center;
   object-position: center;
 }
-
 
 div.carouSnap div.indCat {
   margin: 0 auto;
@@ -169,15 +167,14 @@ div.carouSnap div.indCat > ul {
   justify-content: space-between;
 }
 
-
 div.carouSnap div.indCat > ul > li {
   display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50px;
   background-color: #d6d6d6;
-  cursor:pointer;
+  cursor: pointer;
 }
 div.carouSnap div.indCat > ul > li.active {
-  background:#747373;
+  background: #747373;
 }
