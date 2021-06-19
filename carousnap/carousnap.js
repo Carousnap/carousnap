@@ -132,8 +132,8 @@ window.addEventListener('load', function () {
             class: 'btn-slide-prev'
           })
 
-          btnNext.innerHTML = '&rarr;'
-          btnPrev.innerHTML = '&larr;'
+          btnNext.innerHTML = '&#10093;'
+          btnPrev.innerHTML = '&#10092;'
           btnSlide.appendChild(btnPrev)
           btnSlide.appendChild(btnNext)
 
@@ -173,8 +173,8 @@ window.addEventListener('load', function () {
 
 window.addEventListener('wheel', function (e) {
   if (e.target.parentElement.className == 'photoCollect') {
-    isScroll = true
     let photos = e.target.parentElement.parentElement.children[2]
+    isScroll = true
 
     photos.addEventListener('scroll', function (e) {
       const photos = e.target.childElementCount
@@ -235,6 +235,29 @@ window.addEventListener('touchstart', function (e) {
   }
 })
 
+// window.addEventListener('touchend', function (e) {
+//   if (e.target.parentElement.className == 'photoCollect') {
+//     isScroll = true
+//     const photos = e.target.parentElement.parentElement.children[2]
+//     const styleElement = getComputedStyle(photos)
+//     const scrollWidth = parseInt(styleElement.width, 10)
+//     const total_li_elem =
+//       e.target.parentElement.parentElement.children[3].children[0]
+//         .childElementCount
+
+//     let point = []
+//     let goal = photos.scrollLeft
+//     for (let i = 0; i <= total_li_elem; i++) {
+//       point.push(scrollWidth * i)
+//     }
+//     let closest = point.reduce(function (prev, curr) {
+//       return Math.abs(curr - goal) < Math.abs(prev - goal) ? curr : prev
+//     })
+
+//     photos.scrollLeft = closest
+//   }
+// })
+
 window.addEventListener('click', function (e) {
   if (
     e.target.className == 'btn-slide-prev' &&
@@ -268,7 +291,6 @@ window.addEventListener('click', function (e) {
           sl.setAttribute('class', 'active')
         }
       }
-
       photos.scrollTo(value, 0)
     }
   }
@@ -307,7 +329,6 @@ window.addEventListener('click', function (e) {
           sl.setAttribute('class', 'active')
         }
       }
-
       photos.scrollTo(value, 0)
     }
   }
