@@ -93,7 +93,6 @@ div.carouSnap div.bnSlide > button {
 div.carouSnap div.photoCollect {
   width: 100%;
   height: auto;
-  aspect-ratio: 3 / 2;
 
   background-color: rgb(197, 197, 197);
   display: -webkit-box;
@@ -101,8 +100,11 @@ div.carouSnap div.photoCollect {
   display: flex;
 
   overflow-x: scroll;
+
+  -webkit-scroll-snap-type: x mandatory;
   -ms-scroll-snap-type: x mandatory;
   scroll-snap-type: x mandatory;
+
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   -ms-overflow-style: none;

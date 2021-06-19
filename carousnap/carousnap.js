@@ -12,46 +12,32 @@ window.addEventListener('load', function () {
       const photos = crs.children[2]
       const indicator = crs.children[3]
 
-      const dataRatio = crs.getAttribute('data-ratio')
-      if (dataRatio) {
-        if (dataRatio != null) {
-          switch (dataRatio) {
-            case 'wide-horizontal':
-              photos.style.setProperty('aspect-ratio', '16 / 9')
-              break
-            case 'medium-horizontal':
-              photos.style.setProperty('aspect-ratio', '5 / 4')
-              break
-            case 'square':
-              photos.style.setProperty('aspect-ratio', '1 / 1')
-              break
-            case 'medium-vertical':
-              photos.style.setProperty('aspect-ratio', '4 / 5')
-              break
-            case 'wide-vertical':
-              photos.style.setProperty('aspect-ratio', '9 / 16')
-              break
-            default:
-              return
-          }
-        }
-      }
-
       let scrollSnapSupported = false
+      let msScrollSnapSupported = false
+      let webkitScrollSnapSupported = false
       let displayFlexSupported = false
-      let aspectRatioSupported = false
 
       if (window.CSS) {
         scrollSnapSupported = window.CSS.supports(
           'scroll-snap-type',
           'x mandatory'
         )
+        msScrollSnapSupported = window.CSS.supports(
+          '-ms-scroll-snap-type',
+          'x mandatory'
+        )
+        webkitScrollSnapSupported = window.CSS.supports(
+          '-webkit-scroll-snap-type',
+          'x mandatory'
+        )
         displayFlexSupported = window.CSS.supports('display', 'flex')
-        aspectRatioSupported = window.CSS.supports('aspect-ratio', '3 / 2')
       }
 
-      let allSupported =
-        scrollSnapSupported && displayFlexSupported && aspectRatioSupported
+      let allScrollSnapSupported =
+        scrollSnapSupported ||
+        msScrollSnapSupported ||
+        webkitScrollSnapSupported
+      let allSupported = allScrollSnapSupported && displayFlexSupported
 
       function loadCarousel() {
         if (photos.childElementCount > 10 || photos.childElementCount < 1) {
@@ -61,6 +47,55 @@ window.addEventListener('load', function () {
           const scroll = Math.round(photos.scrollLeft)
           const styleElement = getComputedStyle(crs)
           const scrollWidth = parseInt(styleElement.width, 10)
+
+          const dataRatio = crs.getAttribute('data-ratio')
+          if (dataRatio) {
+            if (dataRatio != null) {
+              switch (dataRatio) {
+                case 'wide-horizontal':
+                  photos.style.setProperty(
+                    'height',
+                    ((9 / 16) * 100 * scrollWidth) / 100 + 'px'
+                  )
+                  break
+                case 'medium-horizontal':
+                  photos.style.setProperty(
+                    'height',
+                    ((4 / 5) * 100 * scrollWidth) / 100 + 'px'
+                  )
+                  break
+                case 'square':
+                  photos.style.setProperty(
+                    'height',
+                    ((1 / 1) * 100 * scrollWidth) / 100 + 'px'
+                  )
+                  break
+                case 'medium-vertical':
+                  photos.style.setProperty(
+                    'height',
+                    ((5 / 4) * 100 * scrollWidth) / 100 + 'px'
+                  )
+                  break
+                case 'wide-vertical':
+                  photos.style.setProperty(
+                    'height',
+                    ((16 / 9) * 100 * scrollWidth) / 100 + 'px'
+                  )
+                  break
+                default:
+                  photos.style.setProperty(
+                    'height',
+                    ((2 / 3) * 100 * scrollWidth) / 100 + 'px'
+                  )
+                  break
+              }
+            }
+          } else {
+            photos.style.setProperty(
+              'height',
+              ((2 / 3) * 100 * scrollWidth) / 100 + 'px'
+            )
+          }
 
           const num = document.createElement('p')
           num.setAttribute('class', 'num')
@@ -304,4 +339,65 @@ window.addEventListener('click', function (e) {
     photos.scrollLeft = value * scrollWidth - scrollWidth
     numSlide.innerHTML = value + ' / ' + photos.childElementCount
   }
+})
+
+window.addEventListener('resize', function (e) {
+  const carousel = document.querySelectorAll('.carouSnap')
+
+  carousel.forEach((crs) => {
+    if (crs.childElementCount === 4) {
+      const photos = crs.children[2]
+      const styleElement = getComputedStyle(crs)
+      const scrollWidth = parseInt(styleElement.width, 10)
+
+      const dataRatio = crs.getAttribute('data-ratio')
+      if (dataRatio) {
+        if (dataRatio != null) {
+          switch (dataRatio) {
+            case 'wide-horizontal':
+              photos.style.setProperty(
+                'height',
+                ((9 / 16) * 100 * scrollWidth) / 100 + 'px'
+              )
+              break
+            case 'medium-horizontal':
+              photos.style.setProperty(
+                'height',
+                ((4 / 5) * 100 * scrollWidth) / 100 + 'px'
+              )
+              break
+            case 'square':
+              photos.style.setProperty(
+                'height',
+                ((1 / 1) * 100 * scrollWidth) / 100 + 'px'
+              )
+              break
+            case 'medium-vertical':
+              photos.style.setProperty(
+                'height',
+                ((5 / 4) * 100 * scrollWidth) / 100 + 'px'
+              )
+              break
+            case 'wide-vertical':
+              photos.style.setProperty(
+                'height',
+                ((16 / 9) * 100 * scrollWidth) / 100 + 'px'
+              )
+              break
+            default:
+              photos.style.setProperty(
+                'height',
+                ((2 / 3) * 100 * scrollWidth) / 100 + 'px'
+              )
+              break
+          }
+        }
+      } else {
+        photos.style.setProperty(
+          'height',
+          ((2 / 3) * 100 * scrollWidth) / 100 + 'px'
+        )
+      }
+    }
+  })
 })
